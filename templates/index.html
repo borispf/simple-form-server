@@ -1,0 +1,9 @@
+<!doctype html>
+<title></title>
+<h1>List of all cases</h1>
+
+<ul>
+    {% for c in cases %}
+        <li><a href="{{ c }}">{{ c.name }}</a></li>
+    {% endfor %}
+</ul>
