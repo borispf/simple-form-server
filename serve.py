@@ -16,7 +16,6 @@ basic_auth = BasicAuth(app)
 @app.route('/')
 def list_cases():
     case_dir = Path('./case')
-    print(list(case_dir.iterdir()))
     return render_template('index.html', cases=list(case_dir.iterdir()))
 
 
