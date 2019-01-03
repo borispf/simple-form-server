@@ -2,7 +2,16 @@ from datetime import datetime
 from pathlib import Path
 import pandas as pd
 from flask import Flask, request, render_template
+from flask_basicauth import BasicAuth
+
+
 app = Flask(__name__, static_folder='case')
+
+app.config['BASIC_AUTH_FORCE'] = True
+app.config['BASIC_AUTH_USERNAME'] = 'rank'
+app.config['BASIC_AUTH_PASSWORD'] = 'weshouldprobablychangethis'
+basic_auth = BasicAuth(app)
+
 
 @app.route('/')
 def list_cases():
