@@ -21,8 +21,8 @@ def list_cases(path):
     dir_ = case_dir / path
     if not dir_.exists():
         abort(404)
-    cases = [f for f in dir_.iterdir() if f.is_file()]
-    folders = [f.relative_to(case_dir) for f in dir_.iterdir() if f.is_dir()]
+    cases = sorted(f for f in dir_.iterdir() if f.is_file())
+    folders = sorted(f.relative_to(case_dir) for f in dir_.iterdir() if f.is_dir())
     return render_template('index.html', folders=folders, cases=cases)
 
 
