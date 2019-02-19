@@ -1,7 +1,7 @@
 from datetime import datetime
 from pathlib import Path
 import pandas as pd
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, abort
 from flask_basicauth import BasicAuth
 
 
@@ -13,10 +13,17 @@ app.config['BASIC_AUTH_PASSWORD'] = 'weshouldprobablychangethis'
 basic_auth = BasicAuth(app)
 
 
-@app.route('/')
-def list_cases():
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def list_cases(path):
+    print(path)
     case_dir = Path('./case')
-    return render_template('index.html', cases=list(case_dir.iterdir()))
+    dir_ = case_dir / path
+    if not dir_.exists():
+        abort(404)
+    cases = [f for f in dir_.iterdir() if f.is_file()]
+    folders = [f.relative_to(case_dir) for f in dir_.iterdir() if f.is_dir()]
+    return render_template('index.html', folders=folders, cases=cases)
 
 
 @app.route('/submit', methods=['POST'])
