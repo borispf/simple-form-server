@@ -1,11 +1,14 @@
 <!doctype html>
-<title></title>
-
+<style>
+li.folder {
+  margin: 0.3em auto;
+}
+</style>
 {% if folders %}
 <h1>Folders</h1>
 <ul>
     {% for f in folders %}
-        <li><a href="{{ f }}">{{ f.name }}</a></li>
+        <li class="folder"><a href="{{ f }}">{{ f.name }}</a></li>
     {% endfor %}
 </ul>
 {% endif %}
