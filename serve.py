@@ -59,4 +59,4 @@ def save_form():
     filename = f'submissions/{datetime.utcnow():%Y-%m-%dT%H-%M-%SZ}.csv'
     form.to_csv(filename, index=False)
     app.logger.info("form submitted")
-    return "Submission successful!"
+    return '<a href="/">Eingabe erfolgreich! Hier gehts zur&uuml;ck zu den anderen F&auml;llen</a>'
